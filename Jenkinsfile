@@ -6,19 +6,18 @@ pipeline {
                 git branch: 'main',
                 credentialsId: 'orasraf1241',
                 url: 'https://github.com/orasraf1241/ci-cd-flask-app.git',
-                checkout: true
             }
         }
 
         stage('Building docker image') {
             steps {
-                sh 'docker build -t my-flask-app /app -f /app/Dockerfile'
+                sh 'docker build -t my-flask-app /app -f /app'
             }
         }
 
         stage('Run docker image') {
             steps {
-                sh 'docker run --name flask-app -d -p 443:5000 my-flask-app'
+                sh 'docker run --name flask-app -d -p 443:443 my-flask-app'
             }
         }
 
