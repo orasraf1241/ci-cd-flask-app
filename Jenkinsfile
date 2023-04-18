@@ -5,13 +5,14 @@ pipeline {
             steps {
                 git branch: 'main',
                 credentialsId: 'orasraf1241',
-                url: 'https://github.com/orasraf1241/ci-cd-flask-app.git',
+                url: 'https://github.com/orasraf1241/ci-cd-flask-app.git'
             }
         }
 
         stage('Building docker image') {
             steps {
-                sh 'docker build -t my-flask-app /app -f /app'
+                sh 'ls'
+                sh 'docker build -t my-flask-app /app'
             }
         }
 
