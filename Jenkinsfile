@@ -43,5 +43,16 @@
                     sh 'docker push orasraf1241/simple-flask-app-leumi:1.0.0'
                 }
             }
+
+            
+            stage('Deploy on target server') {
+            steps {
+                sshagent(['<ssh-credentials-id>']) {
+                    sh '''
+                        ssh <target-server-user>@<target-server-hostname> "sudo docker pull orasraf1241/simple-flask-app-leumi:1.0.0"
+                        ssh <target-server-user>@<target-server-hostname> "sudo docker run --name flask-app -d -p 443:443 orasraf1241/simple-flask-app-leumi:1.0.0"
+                    '''
+                }
+            }
         }
     }
